@@ -8,6 +8,8 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 
+import java.util.Date;
+
 @Data
 public class Order {
 
@@ -34,4 +36,7 @@ public class Order {
 
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     private String ccCVV;
+
+    private Long id;
+    private Date placeAt;
 }
