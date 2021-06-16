@@ -1,19 +1,20 @@
-package tacos;
+package tacos.data;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import tacos.Ingredient;
+import tacos.Taco;
 
 import java.sql.*;
 import java.util.Arrays;
 import java.util.Date;
 
 @Repository
-public class JdbcTacoRepository implements TacoRepository{
+public class JdbcTacoRepository implements TacoRepository {
     
     private JdbcTemplate jdbc;
     
@@ -34,10 +35,11 @@ public class JdbcTacoRepository implements TacoRepository{
     
     private long saveTacoInfo(Taco taco) {
         taco.setCreatedAt(new Date());
-        PreparedStatementCreator psc =
-                new PreparedStatementCreatorFactory(
-                        "insert into Taco (name, createdAt) values (?, ?)",
-                        Types.VARCHAR, Types.TIMESTAMP)
+        var preparedFactory =  new PreparedStatementCreatorFactory(
+                "insert into Taco (name, createdAt) values (?, ?)",
+                Types.VARCHAR, Types.TIMESTAMP);
+        preparedFactory.setReturnGeneratedKeys(true);
+        PreparedStatementCreator psc = preparedFactory
                 .newPreparedStatementCreator(
                         Arrays.asList(
                                 taco.getName(),
