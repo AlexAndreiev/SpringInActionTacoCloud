@@ -2,13 +2,16 @@ package tacos.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import tacos.*;
 import tacos.Ingredient.Type;
+import tacos.data.IngredientJPARepository;
 import tacos.data.IngredientRepository;
+import tacos.data.TacoJPARepository;
 import tacos.data.TacoRepository;
 
 import javax.validation.Valid;
@@ -22,12 +25,16 @@ import java.util.stream.Collectors;
 @SessionAttributes("order")
 public class DesignTacoController {
 
-    private final IngredientRepository ingredientRepo;
-    private final TacoRepository designRepo;
+//    private final IngredientRepository ingredientRepo;
+//    private final TacoRepository designRepo;
+    private final IngredientJPARepository ingredientRepo;
+    private final TacoJPARepository designRepo;
 
     @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepo,
-                                TacoRepository designRepo) {
+//    public DesignTacoController(IngredientRepository ingredientRepo,
+//                                TacoRepository designRepo) {
+    public DesignTacoController(IngredientJPARepository ingredientRepo,
+                                TacoJPARepository designRepo) {
         this.ingredientRepo = ingredientRepo;
         this.designRepo = designRepo;
     }
