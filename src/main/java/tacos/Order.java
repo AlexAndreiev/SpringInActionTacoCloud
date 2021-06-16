@@ -8,7 +8,9 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class Order {
@@ -39,4 +41,9 @@ public class Order {
 
     private Long id;
     private Date placeAt;
+    private List<Taco> tacos = new ArrayList<>();
+
+    public void addDesign(Taco taco) {
+        tacos.add(taco);
+    }
 }
