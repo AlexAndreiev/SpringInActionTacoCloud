@@ -1,6 +1,9 @@
 package tacos.web;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -12,8 +15,11 @@ import org.springframework.web.bind.support.SessionStatus;
 import tacos.Order;
 import tacos.data.OrderJPARepository;
 import tacos.data.OrderRepository;
+import tacos.security.User;
+import tacos.security.UserRepository;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Slf4j
 @Controller
@@ -23,12 +29,15 @@ public class OrderController {
 
 //    private OrderRepository orderRepo;
     private OrderJPARepository orderRepo;
+    private UserRepository userRepository;
 
 //    public OrderController(OrderRepository orderRepo) {
 //        this.orderRepo = orderRepo;
 //    }
-    public OrderController(OrderJPARepository orderRepo) {
+    public OrderController(OrderJPARepository orderRepo,
+                           UserRepository userRepository) {
         this.orderRepo = orderRepo;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/current")
@@ -39,9 +48,18 @@ public class OrderController {
 
     @PostMapping
     public String processOrder(@Valid Order order, Errors errors,
-                               SessionStatus sessionStatus) {
+                               SessionStatus sessionStatus,
+                               Principal principal,
+                               Authentication authentication,
+                               @AuthenticationPrincipal User user) {
         if (errors.hasErrors())
             return "orderForm";
+
+        var user1 = userRepository.findByUsername(principal.getName());
+        user1 = (User) authentication.getPrincipal();
+        Authentication authentication1 = SecurityContextHolder.getContext().getAuthentication();
+        user1 = (User) authentication1.getPrincipal();
+        order.setUser(user);
 
         orderRepo.save(order);
         log.info("Order submitted: " + order);

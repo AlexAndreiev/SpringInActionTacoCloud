@@ -8,7 +8,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
+import tacos.security.User;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "Taco_Order")
-public class Order {
+public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -56,6 +58,9 @@ public class Order {
 
     @ManyToMany(targetEntity = Taco.class)
     private List<Taco> tacos = new ArrayList<>();
+
+    @ManyToOne
+    private User user;
 
     public void addDesign(Taco taco) {
         tacos.add(taco);
