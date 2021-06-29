@@ -28,3 +28,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+logging:
+#  path: /var/logs/
+#  file: TacoCloud.log  // rotation once reach 10Mb by default
+  level:
+    root: WARN
+    org:
+      springframework:
+        security: DEBUG
