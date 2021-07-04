@@ -1,15 +1,15 @@
 package tacos;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import tacos.data.IngredientJPARepository;
-import tacos.data.IngredientRepository;
 
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {
 
-    private IngredientJPARepository ingredientRepository;
+    private final IngredientJPARepository ingredientRepository;
 
     @Autowired
     public IngredientByIdConverter(IngredientJPARepository ingredientRepository) {
@@ -17,8 +17,8 @@ public class IngredientByIdConverter implements Converter<String, Ingredient> {
     }
 
     @Override
-    public Ingredient convert(String s) {
+    public Ingredient convert(@NotNull String s) {
         var ingredient = ingredientRepository.findById(s);
-        return ingredient.get();
+        return ingredient.orElse(null);
     }
 }

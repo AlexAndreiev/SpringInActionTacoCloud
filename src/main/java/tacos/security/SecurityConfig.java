@@ -1,6 +1,5 @@
 package tacos.security;
 
-import com.sun.xml.bind.api.impl.NameConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,16 +10,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
-import javax.sql.DataSource;
+//import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    DataSource dataSource;
+//    @Autowired
+//    DataSource dataSource;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -28,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder encoder(){
-        return new StandardPasswordEncoder("53cr3t");
+        return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -57,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(encoder());
 //        auth.jdbcAuthentication()
- //                .dataSource(dataSource)
+//                .dataSource(dataSource)
 //                .usersByUsernameQuery(
 //                        "select username, password, enabled from Users " +
 //                                "where username=?")
@@ -86,7 +84,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 ////        .url("ldap://tacocloud.com:389/dc=tacocloud,dc=com"); //for separate server, default 33389 at localhost
 //            .root("dc=tacocloud,dc=com") // for embedded ldap server
 //        .ldif("classpath:users.ldif") // spring will search for any ldif file in classpath otherwise
-        ;
+//        ;
     }
 
 }
