@@ -6,8 +6,8 @@ import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import tacos.Ingredient;
-import tacos.Taco;
+import tacos.model.Ingredient;
+import tacos.model.Taco;
 
 import java.sql.*;
 import java.util.Arrays;
@@ -36,7 +36,7 @@ public class JdbcTacoRepository implements TacoRepository {
     private long saveTacoInfo(Taco taco) {
         taco.setCreatedAt(new Date());
         var preparedFactory =  new PreparedStatementCreatorFactory(
-                "insert into Taco (name, createdAt) values (?, ?)",
+                "insert into taco (name, created_at) values (?, ?)",
                 Types.VARCHAR, Types.TIMESTAMP);
         preparedFactory.setReturnGeneratedKeys(true);
         PreparedStatementCreator psc = preparedFactory
@@ -51,7 +51,7 @@ public class JdbcTacoRepository implements TacoRepository {
     }
     
     private void saveIngredientToTaco(Ingredient ingredient, long tacoId) {
-        jdbc.update("insert into Taco_Ingredients (taco, ingredient) " +
+        jdbc.update("insert into taco_ingredients (taco_id, ingredient_id) " +
                 "values (?, ?)", tacoId, ingredient.getId());
     }
 }

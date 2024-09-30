@@ -1,11 +1,9 @@
 package tacos.web;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -14,15 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import tacos.Order;
+import tacos.model.Order;
 import tacos.configuration.OrderProps;
 import tacos.data.OrderJPARepository;
-import tacos.data.OrderRepository;
 import tacos.security.User;
 import tacos.security.UserRepository;
 
 import javax.validation.Valid;
-import java.awt.print.Pageable;
 import java.security.Principal;
 
 @Slf4j
