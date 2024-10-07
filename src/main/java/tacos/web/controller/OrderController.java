@@ -1,5 +1,6 @@
-package tacos.web;
+package tacos.web.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
@@ -25,6 +26,7 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("order")
+@RequiredArgsConstructor
 public class OrderController {
 
 //    private OrderRepository orderRepo;
@@ -32,24 +34,12 @@ public class OrderController {
     private UserRepository userRepository;
     private OrderProps orderProps;
 
-//    public OrderController(OrderRepository orderRepo) {
-//        this.orderRepo = orderRepo;
-//    }
-    public OrderController(OrderJPARepository orderRepo,
-                           UserRepository userRepository,
-                           OrderProps orderProps) {
-        this.orderRepo = orderRepo;
-        this.userRepository = userRepository;
-        this.orderProps = orderProps;
-    }
 
     @GetMapping
     public String ordersForUser( @AuthenticationPrincipal User user, Model model) {
         var pageable = PageRequest.of(0, orderProps.getPageSize());
-
         model.addAttribute("orders",
                 orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
-
         return "orderList";
     }
 
@@ -62,8 +52,8 @@ public class OrderController {
     @PostMapping
     public String processOrder(@Valid Order order, Errors errors,
                                SessionStatus sessionStatus,
-                               Principal principal,
-                               Authentication authentication,
+//                               Principal principal,
+//                               Authentication authentication,
                                @AuthenticationPrincipal User user) {
         if (errors.hasErrors())
             return "orderForm";
@@ -75,7 +65,7 @@ public class OrderController {
         order.setUser(user);
 
         orderRepo.save(order);
-        log.info("Order submitted: " + order);
+        log.info("Order submitted: {}", order);
         sessionStatus.setComplete();
         return "redirect:/";
     }
