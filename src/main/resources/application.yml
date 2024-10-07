@@ -15,14 +15,14 @@ taco:
 spring:
   datasource:
 #    url: jdbc:mysql://localhost/tacocloud
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:testdb;database_to_lower=true
 #    username: tacodb
 #    password: tacopassword
 #    driver-class-name: com.mysql.jdbc.Driver
 #    initialize: true
     initialization-mode: always
-    schema:
-      - classpath:schema.sql
+#    schema:
+#      - classpath:schema.sql
 #      - order-schema.sql
 #      - ingredient-schema.sql
 #      - taco-schema.sql
