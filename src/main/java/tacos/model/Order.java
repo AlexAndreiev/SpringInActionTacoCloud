@@ -1,4 +1,4 @@
-package tacos;
+package tacos.model;
 
 import lombok.Data;
 
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Taco_Order")
+@Table(name = "taco_order")
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,18 +27,23 @@ public class Order implements Serializable {
     private Long id;
 
     @NotBlank(message = "Name is required")
+    @Column(name = "delivery_name")
     private String deliveryName;
 
     @NotBlank(message = "Street is required")
+    @Column(name = "delivery_street")
     private String deliveryStreet;
 
     @NotBlank(message = "City is required")
+    @Column(name = "delivery_city")
     private String deliveryCity;
 
     @NotBlank(message = "State is required")
+    @Column(name = "delivery_state")
     private String deliveryState;
 
     @NotBlank(message = "Zip is required")
+    @Column(name = "delivery_zip")
     private String deliveryZip;
 
     @CreditCardNumber(message = "Not a valid credit card number")
@@ -48,8 +53,10 @@ public class Order implements Serializable {
     private String ccExpiration;
 
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
+    @Column(name = "cc_cvv")
     private String ccCVV;
 
+    @Column(name = "placed_at")
     private Date placedAt;
     @PrePersist
     void placeAt(){
@@ -59,7 +66,8 @@ public class Order implements Serializable {
     @ManyToMany(targetEntity = Taco.class)
     private List<Taco> tacos = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     public void addDesign(Taco taco) {

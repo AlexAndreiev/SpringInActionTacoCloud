@@ -32,12 +32,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .antMatchers("/design", "/orders").access("hasRole('ROLE_USER')")
-                .antMatchers("/","/**").access("permitAll")
-                .and().csrf().ignoringAntMatchers("/h2-console/**")
-                .and().headers().frameOptions().sameOrigin() // for correct h2-console displaying
-                .and()
+            .authorizeRequests()
+            .antMatchers("/design", "/orders").access("hasRole('ROLE_USER')")
+            .antMatchers("/","/**").access("permitAll")
+            .and().csrf().ignoringAntMatchers("/h2-console/**")
+            .and().headers().frameOptions().sameOrigin() // for correct h2-console displaying
+            .and()
         .formLogin()
             .loginPage("/login")
 //        .loginProcessingUrl("/authenticate") // for listening to handle login submission
