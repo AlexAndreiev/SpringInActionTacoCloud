@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tacos.RegistrationForm;
-import tacos.security.UserRepository;
+import tacos.UserRepository;
 
 @Controller
 @RequestMapping("/register")

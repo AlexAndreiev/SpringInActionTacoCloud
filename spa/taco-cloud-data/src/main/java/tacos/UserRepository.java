@@ -1,7 +1,6 @@
-package tacos.security;
+package tacos;
 
 import org.springframework.data.repository.CrudRepository;
-import tacos.User;
 
 import java.util.Optional;
 
