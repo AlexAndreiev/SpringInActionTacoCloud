@@ -2,24 +2,69 @@ package tacos.web.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import tacos.Order;
+import tacos.OrderRepository;
+import tacos.Taco;
 import tacos.configuration.OrderProps;
 import tacos.UserRepository;
 
+import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
+
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/orders")
 @SessionAttributes("order")
 @RequiredArgsConstructor
 public class OrderController {
 
 //    private tacos.OrderRepository orderRepo;
-//    private OrderJPARepository orderRepo;
+    private OrderRepository orderRepo;
     private UserRepository userRepository;
     private OrderProps orderProps;
 
+    @PutMapping("/{orderId}")
+    public Order putOrder(@RequestBody Order order) {
+        return orderRepo.save(order);
+    }
+
+    @PatchMapping(value = "/{orderId}", consumes = APPLICATION_JSON_VALUE)
+    public Order patchOrder(@PathVariable("orderId") Long orderId, @RequestBody Order patch) {
+        var order = orderRepo.findById(orderId).get();
+        if (patch.getDeliveryName() != null) {
+            order.setDeliveryName(patch.getDeliveryName());
+        }
+        if (patch.getDeliveryStreet() != null) {
+            order.setDeliveryStreet(patch.getDeliveryStreet());
+        }
+        if (patch.getDeliveryCity() != null) {
+            order.setDeliveryCity(patch.getDeliveryCity());
+        }
+        if (patch.getDeliveryState() != null) {
+            order.setDeliveryState(patch.getDeliveryState());
+        }
+        if (patch.getDeliveryZip() != null) {
+            order.setDeliveryZip(patch.getDeliveryZip());
+        }
+        if (patch.getCcNumber() != null) {
+            order.setCcNumber(patch.getCcNumber());
+        }
+        if (patch.getCcExpiration() != null) {
+            order.setCcExpiration(patch.getCcExpiration());
+        }
+
+        return orderRepo.save(order);
+    }
+
+    @DeleteMapping("/{orderId}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteOrder(@PathVariable("orderId") Long orderId) {
+        try {
+            orderRepo.deleteById(orderId);
+        } catch (EmptyResultDataAccessException ignore) {}
+    }
 
 //    @GetMapping
 //    public String ordersForUser( @AuthenticationPrincipal User user, Model model) {
