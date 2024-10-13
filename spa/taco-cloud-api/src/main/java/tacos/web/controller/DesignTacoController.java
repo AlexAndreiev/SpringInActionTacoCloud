@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
@@ -26,10 +25,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class DesignTacoController {
-
-//    private final tacos.IngredientJPARepository ingredientRepo;
-//    private final tacos.TacoJPARepository designRepo;
-//    private final UserRepository userRepo;
     private TacoRepository tacoRepository;
     private EntityLinks entityLinks;
 
