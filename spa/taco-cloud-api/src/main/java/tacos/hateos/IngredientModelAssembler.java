@@ -14,13 +14,13 @@ public class IngredientModelAssembler extends RepresentationModelAssemblerSuppor
 
     @NotNull
     @Override
-    public IngredientModel toModel(@NotNull Ingredient entity) {
+    public IngredientModel toModel(Ingredient entity) {
         return createModelWithId(entity.getId(), entity);
     }
 
     @NotNull
     @Override
-    protected IngredientModel instantiateModel(@NotNull Ingredient entity) {
+    protected IngredientModel instantiateModel(Ingredient entity) {
         return new IngredientModel(entity);
     }
 }

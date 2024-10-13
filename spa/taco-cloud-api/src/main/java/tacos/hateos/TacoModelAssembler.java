@@ -1,6 +1,5 @@
 package tacos.hateos;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import tacos.Taco;
 import tacos.web.controller.DesignTacoController;
@@ -10,15 +9,13 @@ public class TacoModelAssembler extends RepresentationModelAssemblerSupport<Taco
         super(DesignTacoController.class, TacoModel.class);
     }
 
-    @NotNull
     @Override
-    protected TacoModel instantiateModel(@NotNull Taco entity) {
+    protected TacoModel instantiateModel(Taco entity) {
         return new TacoModel(entity);
     }
 
-    @NotNull
     @Override
-    public TacoModel toModel(@NotNull Taco entity) {
+    public TacoModel toModel(Taco entity) {
         return createModelWithId(entity.getId(), entity);
     }
 }

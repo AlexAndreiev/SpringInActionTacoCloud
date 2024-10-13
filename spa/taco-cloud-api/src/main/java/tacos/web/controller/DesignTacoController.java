@@ -25,8 +25,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class DesignTacoController {
-    private TacoRepository tacoRepository;
-    private EntityLinks entityLinks;
+    private final TacoRepository tacoRepository;
+    private final EntityLinks entityLinks;
 
 //    @GetMapping("/recent")
 //    public Iterable<Taco> recentTacos() {
@@ -36,7 +36,7 @@ public class DesignTacoController {
 
     @GetMapping("/recent")
     public CollectionModel<TacoModel> recentTacos() {
-        var page = PageRequest.of(0, 12, Sort.by("createAt").descending());
+        var page = PageRequest.of(0, 12, Sort.by("createdAt").descending());
         var tacos = tacoRepository.findAll(page).getContent();
         var collectionModel = new TacoModelAssembler().toCollectionModel(tacos);
         collectionModel.add(linkTo(methodOn(DesignTacoController.class).recentTacos())
