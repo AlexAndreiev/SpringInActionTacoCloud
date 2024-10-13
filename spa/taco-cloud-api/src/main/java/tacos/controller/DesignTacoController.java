@@ -1,4 +1,4 @@
-package tacos.web.controller;
+package tacos.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.hateoas.server.EntityLinks;
-import org.springframework.hateoas.EntityModel;
 import tacos.Taco;
 import tacos.TacoRepository;
 import tacos.hateos.TacoModel;
@@ -27,12 +26,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 public class DesignTacoController {
     private final TacoRepository tacoRepository;
     private final EntityLinks entityLinks;
-
-//    @GetMapping("/recent")
-//    public Iterable<Taco> recentTacos() {
-//        var page = PageRequest.of(0, 12, Sort.by("createAt").descending());
-//        return tacoRepository.findAll(page).getContent();
-//    }
 
     @GetMapping("/recent")
     public CollectionModel<TacoModel> recentTacos() {

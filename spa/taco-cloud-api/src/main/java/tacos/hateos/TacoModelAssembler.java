@@ -2,7 +2,7 @@ package tacos.hateos;
 
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import tacos.Taco;
-import tacos.web.controller.DesignTacoController;
+import tacos.controller.DesignTacoController;
 
 public class TacoModelAssembler extends RepresentationModelAssemblerSupport<Taco, TacoModel> {
     public TacoModelAssembler() {

@@ -7,7 +7,9 @@ taco:
 spring:
   datasource:
     url: jdbc:h2:mem:testdb;database_to_lower=true
-
+  data:
+    rest:
+      base-path: /api
 
 logging:
 #  path: /var/logs/

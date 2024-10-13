@@ -3,7 +3,7 @@ package tacos.hateos;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import tacos.Ingredient;
-import tacos.web.controller.IngredientController;
+import tacos.controller.IngredientController;
 
 public class IngredientModelAssembler extends RepresentationModelAssemblerSupport<Ingredient, IngredientModel> {
 
