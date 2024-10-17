@@ -10,6 +10,18 @@ spring:
   data:
     rest:
       base-path: /api
+#  jms:
+#    template:
+#      default-destination: www.somehost.com
+#  artemis:
+#    password:
+#    user:
+#   broker-url: localhost:6161
+#  rabbitmq:
+#    host: rabbit.tacocloud.com
+#    port: 5673
+#    username: tacoweb
+#    password: somePwd
 
 logging:
 #  path: /var/logs/
