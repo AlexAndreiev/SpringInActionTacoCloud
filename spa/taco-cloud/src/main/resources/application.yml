@@ -10,6 +10,27 @@ spring:
   data:
     rest:
       base-path: /api
+#  jms:
+#    template:
+#      default-destination: www.somehost.com
+#  artemis:
+#    password:
+#    user:
+#   broker-url: localhost:6161
+#  rabbitmq:
+#    host: rabbit.tacocloud.com
+#    port: 5673
+#    username: tacoweb
+#    password: somePwd
+  kafka:
+    bootstrap-servers:
+      - kafka.tacocloud.com:9092
+      - kafka.tacocloud.com:9093
+      - kafka.tacocloud.com:9094
+    template:
+      default-topic: tacocloud.orders.topic
+
+
 
 logging:
 #  path: /var/logs/
