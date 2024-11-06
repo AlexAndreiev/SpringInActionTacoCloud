@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class IngredientController {
 
     @GetMapping("/{id}")
-    public Ingredient getIngredient(@PathVariable int id) {
+    public Ingredient getIngredient(@PathVariable String id) {
         return new Ingredient("Some code", "Test ingredient");
     }
 }
