@@ -5,7 +5,8 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/habuma/tacocloud-config
-
+          uri: https://github:com/alexandreiev/SpringInActionTacoCloud
+          default-label: ch13
+          search-paths: microservices/configs
 server:
   port: 8888
