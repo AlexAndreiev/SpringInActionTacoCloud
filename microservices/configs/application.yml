@@ -1,0 +1,16 @@
+server:
+  port: 0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: http://localhost:10080/tacocloud/tacocloud-config
+          default-label: ch13
+          search-paths: config
