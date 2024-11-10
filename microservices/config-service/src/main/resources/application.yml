@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github:com/alexandreiev/SpringInActionTacoCloud
+          uri: https://github.com/alexandreiev/SpringInActionTacoCloud
           default-label: ch13
           search-paths: microservices/configs
 server:

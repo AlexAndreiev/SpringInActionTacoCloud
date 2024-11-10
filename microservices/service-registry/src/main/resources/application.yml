@@ -25,10 +25,10 @@ server:
 eureka:
   instance:
     hostname: localhost
-other:
-  eureka:
-    host: localhost
-    port: 8762
+#other:
+#  eureka:
+#    host: localhost
+#    port: 8762
 
 ---
 spring:
